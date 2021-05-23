@@ -1,23 +1,30 @@
 const initialState = {
-  countries: [],
   country: {},
-  loading: true,
-  error: {},
+  loading: false,
+  message: '',
+  error: null,
 }
 
 const covidReducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
-    case 'GET_COUNTRIES':
+    case 'REQUEST':
       return {
         ...state,
-        countries: payload,
-        loading: false,
+        loading: true,
       }
     case 'GET_COUNTRY':
       return {
         ...state,
         country: payload,
+        loading: false,
+        message: '',
+        error: null,
+      }
+    case 'NO_DATA':
+      return {
+        ...state,
+        message: payload,
         loading: false,
       }
     case 'ERROR':
